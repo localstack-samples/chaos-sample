@@ -4,11 +4,11 @@ This project demonstrates a simple chaos engineering experiment using LocalStack
 
 ## Prerequisites
 
-* **LocalStack** with the [`localstack` CLI](https://docs.localstack.cloud/getting-started/installation/#localstack-cli).
+* **LocalStack** with the [`lstk` CLI](https://docs.localstack.cloud/aws/developer-tools/running-localstack/lstk/).
 * **AWS SDK for .NET:** Install the `AWSSDK.DynamoDBv2` NuGet package in your project.
 * **.NET SDK:** Ensure you have the .NET SDK installed.
-* **[AWS CLI](https://docs.localstack.cloud/user-guide/integrations/aws-cli/)** with the [`awslocal` wrapper](https://docs.localstack.cloud/user-guide/integrations/aws-cli/#localstack-aws-cli-awslocal).
-* A valid [LocalStack for AWS license](https://localstack.cloud/pricing). Your license provides a [`LOCALSTACK_AUTH_TOKEN`](https://docs.localstack.cloud/getting-started/auth-token/) to activate LocalStack.
+* **[AWS CLI](https://docs.localstack.cloud/user-guide/integrations/aws-cli/)**, required by `lstk aws`.
+* A valid [LocalStack for AWS license](https://localstack.cloud/pricing). Your license provides a [`LOCALSTACK_AUTH_TOKEN`](https://docs.localstack.cloud/aws/getting-started/auth-token/) to activate LocalStack.
 
 
 ## Running the Demo
@@ -18,7 +18,6 @@ Start LocalStack with the `LOCALSTACK_AUTH_TOKEN` pre-configured:
 ```bash
 export LOCALSTACK_AUTH_TOKEN=<your-auth-token>
 make start
-make ready
 ```
 
 1. **Start LocalStack:** Ensure LocalStack is running locally as described above.
