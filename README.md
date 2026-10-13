@@ -29,6 +29,8 @@ make start
     * Retrieve the item and print its attributes to the console.
     * Handle any exceptions that may occur during these operations.
 
+3. **Test the error handling:** `make test` runs the demo twice. The first run has a fault injected on DynamoDB `PutItem` through the [LocalStack Chaos API](https://docs.localstack.cloud/aws/capabilities/chaos-engineering/chaos-api/), so the program reports the `AccessDeniedException`. The second run has no fault and reads the item back.
+
 ## Key Concepts
 
 * **LocalStack:**  Provides a local AWS cloud stack for development and testing.  This allows you to run the demo without needing a real AWS account.

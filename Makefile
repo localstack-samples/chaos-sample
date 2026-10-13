@@ -21,6 +21,9 @@ logs:		## Save the logs in a separate file
 	@lstk logs > logs.txt
 
 run:		## Run the chaos demo
-	dotnet run
+	dotnet run --project ChaosEngDemo
 
-.PHONY: usage install start stop logs run
+test:		## Run the demo with and without a DynamoDB fault injected
+	./test.sh
+
+.PHONY: usage install start stop logs run test
