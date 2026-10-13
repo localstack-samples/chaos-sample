@@ -1,0 +1,51 @@
+name: Run on LocalStack
+
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  chaos:
+    name: Run the chaos demo
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Install lstk
+        run: |
+          npm install -g @localstack/lstk
+          lstk setup aws --force --non-interactive
+
+      - name: Build the demo
+        run: dotnet build ChaosEngDemo
+
+      - name: Start LocalStack
+        env:
+          LOCALSTACK_AUTH_TOKEN: ${{ secrets.LOCALSTACK_AUTH_TOKEN }}
+        run: lstk start
+
+      - name: Run tests
+        run: make test
+
+      - name: Show LocalStack logs
+        if: failure()
+        run: lstk logs | tail -200
